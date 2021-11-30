@@ -1,7 +1,3 @@
-// ---------------------
-// Inloggningsformuläret
-// ---------------------
-
 const users = [
   { username: "Janne", password: "test" },
   { username: "Assar", password: "kattmat" },
@@ -13,20 +9,32 @@ if (!localStorage.getItem("users") || !localStorage.getItem("authenticated")) {
   localStorage.setItem("authenticated", false);
 }
 
+// --------------------
+// Logik för inloggning
+// --------------------
+
+// Hjälper för att hålla koden ren när många saker händer när man loggar in/ut
+function authStateChanged() {
+  updateHeaderState();
+}
+
+// Användas för att logga in eller ut en användare
+function setAuthState(bool) {
+  console.log(bool ? "Inloggad" : "Utloggad");
+  localStorage.setItem("authenticated", JSON.stringify(bool));
+  authStateChanged();
+}
+
+// ---------------------
+// Inloggningsformuläret
+// ---------------------
+
 // Hänvisa till element
 const authForm = document.getElementById("auth-form");
 const usernameInput = document.getElementById("form-username");
 const passwordInput = document.getElementById("form-password");
 
-// Användas för att logga in eller ut en användare
-// Dum sak att skicka med till användarna men oh well
-function setAuthState(bool) {
-  console.log(bool ? "Inloggad" : "Utloggad");
-  localStorage.setItem("authenticated", JSON.stringify(bool));
-}
-
-// Logik för inloggnignsformuläret
-function authSubmit(event) {
+function loginSubmit(event) {
   event.preventDefault();
 
   const usersInStorage = JSON.parse(localStorage.getItem("users"));
@@ -39,14 +47,14 @@ function authSubmit(event) {
         user.password === passwordInput.value
     )
   ) {
-    console.log("Rätt lösenord");
+    console.log("Rätt namn & lösenord");
     setAuthState(true);
-    updateHeaderState();
+    closeDialog();
   } else {
-    console.log("Fel lösenord");
+    console.log("Fel namn eller lösenord");
   }
 }
-authForm.addEventListener("submit", authSubmit);
+authForm.addEventListener("submit", loginSubmit);
 
 // -----------
 // Dialogrutan
@@ -67,14 +75,6 @@ function outsideClickClose(event) {
   !dialogContent.contains(event.target) && closeDialog();
 }
 
-function closeDialog() {
-  dialog.classList.add("hidden");
-  // Ta bort alla event listeners som är kopplade till dialogrutan
-  closeButton.addEventListener("click", closeDialog);
-  document.removeEventListener("keydown", escClose);
-  document.removeEventListener("click", outsideClickClose);
-}
-
 function openDialog() {
   dialog.classList.remove("hidden");
   closeButton.addEventListener("click", closeDialog); // Stänga med stängknappen
@@ -83,34 +83,49 @@ function openDialog() {
   usernameInput.focus(); // Fokusera på användarnamn-fältet så fort dialogen öppnas
 }
 
+function closeDialog() {
+  dialog.classList.add("hidden");
+  // Ta bort alla event listeners som är kopplade till dialogrutan när den stängs
+  closeButton.addEventListener("click", closeDialog);
+  document.removeEventListener("keydown", escClose);
+  document.removeEventListener("click", outsideClickClose);
+}
+
 // ---------------
 // Dynamisk header
 // ---------------
 
-const headerAuth = document.getElementById("header-auth");
+const headerButton = document.getElementById("header-auth");
 
 // Ska köras när auth state ändras
 function updateHeaderState() {
-  const loggedIn = localStorage.getItem("user");
+  const loggedIn = JSON.parse(localStorage.getItem("authenticated"));
 
-  if (loggedIn === true) {
-    headerAuth.classList.add("btn-ghost");
-    headerAuth.innerHTML = "Logga ut";
+  if (loggedIn) {
+    headerButton.classList.add("btn-ghost");
+    headerButton.innerHTML = "Logga ut";
   } else {
-    headerAuth.classList.remove("btn-primary");
-    headerAuth.innerHTML = "Logga in";
+    headerButton.classList.remove("btn-ghost");
+    headerButton.innerHTML = "Logga in";
   }
 }
-updateHeaderState(); // Kör för att koll om användaren är inloggad varje gång sidan laddas
+updateHeaderState(); // Kör för att kolla om användaren är inloggad när sidan laddas
 
-// Det som körs när knappen i headern klickas
-function handleClick() {
-  const loggedIn = localStorage.getItem("user");
+// Körs när knappen i headern klickas
+function headerButtonClick() {
+  const loggedIn = JSON.parse(localStorage.getItem("authenticated"));
 
-  if (loggedIn === true) {
+  if (loggedIn) {
     setAuthState(false);
   } else {
     openDialog();
   }
 }
-headerAuth.addEventListener("click", handleClick);
+headerButton.addEventListener("click", headerButtonClick);
+
+// --------------
+// Knappen i hero
+// --------------
+
+const heroButton = document.getElementById("hero-button");
+heroButton.addEventListener("click", () => openDialog());
