@@ -24,10 +24,7 @@ function authStateChanged() {
   updateContentView();
 }
 
-//
-// Registrera konton / Logga in
-//
-
+// Registrera användare
 function register(username, password) {
   // Plocka ut alla användare från "databasen"
   const usersInStorage = JSON.parse(localStorage.getItem("users"));
@@ -52,6 +49,7 @@ function register(username, password) {
   setAuthState(usernameInput.value);
 }
 
+// Logga in användare
 function logIn(username, password) {
   const usersInStorage = JSON.parse(localStorage.getItem("users"));
 
