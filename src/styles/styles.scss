@@ -133,7 +133,7 @@ footer {
   position: fixed;
   inset: 0;
 
-  .dialog-content {
+  #dialog-content {
     background: rgb(var(--background));
     border: 0.125rem solid rgb(var(--foreground));
     display: flex;
@@ -142,7 +142,7 @@ footer {
     padding: 2rem;
     gap: 2rem;
 
-    .dialog-close {
+    #dialog-close {
       display: flex;
       gap: 0.25rem;
     }

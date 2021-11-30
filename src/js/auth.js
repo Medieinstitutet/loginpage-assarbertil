@@ -1,36 +1,44 @@
-// Registrerade användare
+import { updateHeaderState } from "./header.js";
+
+//
+// Hanterar authentication logik
+//
+
 const users = [
   { username: "Janne", password: "test" },
   { username: "Assar", password: "kattmat" },
 ];
 
 // Hänvisa till alla element
-const headerAuth = document.getElementById("header-auth");
 const authForm = document.getElementById("auth-form");
 const usernameInput = document.getElementById("form-username");
 const passwordInput = document.getElementById("form-password");
 
-// Kolla om användaren är inloggad varje gång sidan laddas
-if (localStorage.getItem("user")) {
-  headerAuth.classList.add("btn-ghost");
-  headerAuth.innerHTML = "Logga ut";
-}
+// Funktion som kan användas överallt för att logga in eller ut en användare
+// Sjukt osäker sak att skicka med till användarna när det funkar så här men oh well
+export const setAuthState = bool => {
+  console.log(bool ? "Inloggad" : "Utloggad");
+  localStorage.setItem("authenticated", JSON.stringify(bool));
+  loggedIn = bool;
+};
 
-// Kör denna när authentication state har ändrats
-const updateHeaderState = () => {
-  if (localStorage.getItem("user")) {
-    headerAuth.classList.add("btn-ghost");
+// Logik för inloggnignsformuläret
+const authSubmit = e => {
+  e.preventDefault();
+
+  if (
+    // Här kollar vi om användaren finns i listan
+    users.some(
+      user =>
+        user.username === usernameInput.value &&
+        user.password === passwordInput.value
+    )
+  ) {
+    console.log("Rätt lösenord");
+    setAuthState(true);
+    updateHeaderState();
   } else {
-    headerAuth.classList.remove("btn-ghost");
+    console.log("Fel lösenord");
   }
 };
-
-const onAuthSubmit = e => {
-  e.preventDefault();
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-  localStorage.setItem("user", JSON.stringify({ username, password }));
-  updateHeaderState();
-};
-
-authForm.addEventListener("submit", onAuthSubmit);
+authForm.addEventListener("submit", authSubmit);

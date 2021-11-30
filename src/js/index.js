@@ -1,2 +1,3 @@
-import "./dialog.js";
 import "./auth.js";
+import "./dialog.js";
+import "./header.js";
