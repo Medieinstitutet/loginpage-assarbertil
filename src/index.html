@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
 
-    <script defer src="./main.js"></script>
+    <script type="module" src="./js/index.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -22,7 +22,7 @@
       <div class="container header-items">
         <img
           class="header-logo"
-          src="./img/logo.svg"
+          src="data-url:./img/logo.svg"
           alt="Inloggningifys logotyp"
         />
         <button id="header-auth" class="btn">Logga in</button>
@@ -54,7 +54,7 @@
     <footer>
       <div class="container footer-items">
         <p>&copy; Inloggningify</p>
-        <img class="square" src="./img/square.svg" alt="" />
+        <img class="square" src="data-url:./img/square.svg" alt="" />
       </div>
     </footer>
 
@@ -62,7 +62,7 @@
     <div id="dialog" class="">
       <div class="dialog-content">
         <button class="dialog-close">
-          <img src="./img/cross.svg" alt="" />
+          <img src="data-url:./img/cross.svg" alt="" />
           Stäng
         </button>
         <form id="auth-form">

@@ -65,7 +65,7 @@ button {
     background: rgb(var(--yellow));
 
     &::after {
-      content: url(../img/chevron.svg);
+      content: url(data-url:../img/chevron.svg);
       height: 1.25rem;
       width: 1.25rem;
       transform: translateY(-2px);
