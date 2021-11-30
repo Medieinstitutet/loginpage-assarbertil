@@ -15,7 +15,9 @@
       rel="stylesheet"
     />
 
-    <script type="module" src="js/script.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/dialog.js"></script>
+    <script defer src="js/ui.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -33,7 +35,7 @@
     <!-- Main content -->
     <main class="container">
       <!-- No auth view -->
-      <div id="hero" class="">
+      <section id="hero" class="">
         <h1>
           En inkomplett tjänst för <br />
           inloggningar, konstruerad<br />
@@ -41,14 +43,16 @@
         </h1>
         <hr class="hero-line" />
         <button id="hero-button" class="btn btn-large">Testa gratis</button>
-      </div>
+      </section>
 
       <!-- Authed view -->
-      <div id="login-greeting" class="hidden">
+      <section id="login-greeting" class="hidden">
         <h2 id="greeting-title">Välkommen, Assar.</h2>
         <p>Du har loggat in.</p>
-        <button class="btn btn-ghost">Logga ut</button>
-      </div>
+        <button id="greeting-button" class="btn btn-ghost no-padding">
+          Logga ut
+        </button>
+      </section>
     </main>
 
     <!-- Footer -->

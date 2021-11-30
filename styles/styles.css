@@ -220,6 +220,10 @@ footer .footer-items {
   display: none !important;
 }
 
+.no-padding {
+  padding: 0 !important;
+}
+
 @media (min-width: 768px) {
   h1 {
     font-size: 3.5rem;
@@ -230,8 +234,8 @@ footer .footer-items {
   .container {
     max-width: 768px;
   }
-  #login-greeting {
-    padding: 0 16rem;
+  main #login-greeting {
+    padding: 8rem 16rem 0 16rem;
   }
 }
 
