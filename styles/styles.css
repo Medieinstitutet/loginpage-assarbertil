@@ -75,7 +75,7 @@ button.btn {
 }
 
 button.btn::after {
-  content: url(data-url:../img/chevron.svg);
+  content: url(../img/chevron.svg);
   height: 1.25rem;
   width: 1.25rem;
   -webkit-transform: translateY(-2px);

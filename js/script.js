@@ -12,12 +12,15 @@ const authForm = document.getElementById("auth-form");
 const usernameInput = document.getElementById("form-username");
 const passwordInput = document.getElementById("form-password");
 
+// Ifall ingen användarinfo är sparad i local storage, lägg dit ett falskt värde ändå
+!localStorage.getItem("authenticated") &&
+  localStorage.setItem("authenticated", false);
+
 // Funktion som kan användas överallt för att logga in eller ut en användare
 // Dum sak att skicka med till användarna när det funkar så här men oh well
-export const setAuthState = bool => {
+const setAuthState = bool => {
   console.log(bool ? "Inloggad" : "Utloggad");
   localStorage.setItem("authenticated", JSON.stringify(bool));
-  loggedIn = bool;
 };
 
 // Logik för inloggnignsformuläret
@@ -65,9 +68,45 @@ const closeDialog = () => {
   document.removeEventListener("click", outsideClickClose);
 };
 
-export const openDialog = () => {
+const openDialog = () => {
   dialog.classList.remove("hidden");
   closeButton.addEventListener("click", closeDialog); // Stänga med stängknappen
   document.addEventListener("keydown", escClose); // Stänga med ESC-knappen
-  setTimeout(() => document.addEventListener("click", outsideClickClose), 0); // Stänga genom att klicka utanför
+  setTimeout(() => document.addEventListener("click", outsideClickClose), 100); // Stänga genom att klicka utanför
+
+  usernameInput.focus(); // Fokusera på användarnamn-fältet så fort dialogen öppnas
 };
+
+//
+// Dynamisk header
+//
+
+const headerAuth = document.getElementById("header-auth");
+
+// Ska köras när auth state ändras
+const updateHeaderState = () => {
+  const loggedIn = localStorage.getItem("user");
+
+  if (loggedIn === true) {
+    headerAuth.classList.add("btn-ghost");
+    headerAuth.innerHTML = "Logga ut";
+  } else {
+    headerAuth.classList.remove("btn-primary");
+    headerAuth.innerHTML = "Logga in";
+  }
+};
+
+// Kolla om användaren är inloggad varje gång sidan laddas
+updateHeaderState();
+
+// Det som körs när knappen i headern klickas
+const handleClick = () => {
+  const loggedIn = localStorage.getItem("user");
+
+  if (loggedIn === true) {
+    setAuthState(false);
+  } else {
+    openDialog();
+  }
+};
+headerAuth.addEventListener("click", handleClick);
