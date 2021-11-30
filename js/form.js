@@ -21,7 +21,7 @@ function loginSubmit(event) {
     )
   ) {
     console.log("Rätt namn & lösenord");
-    setAuthState(true);
+    setAuthState(usernameInput.value);
     closeDialog();
   } else {
     console.log("Fel namn eller lösenord");

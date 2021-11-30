@@ -1,7 +1,6 @@
 // Vars
 
 :root {
-  --opacity: 1;
   --background: 231, 229, 228;
   --foreground: 28, 25, 23;
   --yellow: 238, 255, 47;
@@ -120,7 +119,6 @@ footer {
 }
 
 #dialog {
-  --opacity: 0.95;
   background: rgba(var(--background), 0.95);
   min-width: 100vw;
   min-height: 100vh;

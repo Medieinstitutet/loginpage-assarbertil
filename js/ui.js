@@ -13,7 +13,7 @@ const headerButton = document.getElementById("header-auth");
 
 // Ska köras när auth state ändras
 function updateHeaderState() {
-  const loggedIn = JSON.parse(localStorage.getItem("authenticated"));
+  const loggedIn = JSON.parse(localStorage.getItem("user"));
 
   if (loggedIn) {
     headerButton.classList.add("btn-ghost");
@@ -27,9 +27,9 @@ updateHeaderState(); // Kör för att kolla om användaren är inloggad när sid
 
 // Körs när knappen i headern klickas
 function headerButtonClick() {
-  const loggedIn = JSON.parse(localStorage.getItem("authenticated"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  if (loggedIn) {
+  if (user) {
     setAuthState(false);
   } else {
     openDialog();
@@ -42,13 +42,15 @@ headerButton.addEventListener("click", headerButtonClick);
 // -------------------
 
 function updateContentView() {
-  const loggedIn = JSON.parse(localStorage.getItem("authenticated"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Element
   const hero = document.getElementById("hero");
   const loggedInView = document.getElementById("login-greeting");
-
-  if (loggedIn) {
+  const greetingTitle = document.getElementById("greeting-title");
+  if (user) {
+    // Visa användarens namn
+    greetingTitle.innerHTML = `Välkommen, ${user}.`;
     // Visa inloggad-sidan
     hero.classList.add("hidden");
     loggedInView.classList.remove("hidden");
