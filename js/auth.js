@@ -18,7 +18,7 @@ function setAuthState(user) {
   authStateChanged();
 }
 
-// Hjälper mig hålla koden fin när många saker händer när man loggar in/ut
+// Hjälper hålla koden fin när många saker behöver veta när man loggar in/ut
 function authStateChanged() {
   updateHeaderState();
   updateContentView();
@@ -28,28 +28,28 @@ function authStateChanged() {
 // Registrera konton / Logga in
 //
 
-function register() {
+function register(username, password) {
   // Plocka ut alla användare från "databasen"
   const usersInStorage = JSON.parse(localStorage.getItem("users"));
 
   // Kolla först att användarnamnet inte redan finns i listan
-  if (usersInStorage.some(user => user.username === usernameInput.value)) {
+  if (usersInStorage.some(user => user.username === username)) {
     errorMessage.innerText = "Användaren finns redan";
     console.log("Finn");
-    return;
+    return false;
   }
 
   // Lägg sen till vår nya användare i listan
   usersInStorage.push({
-    username: usernameInput.value,
-    password: passwordInput.value,
+    username: username,
+    password: password,
   });
 
-  // Och sätt sist tillbaka den uppdaterade listan i localStorage
+  // Sätt sist tillbaka den uppdaterade listan i localStorage
   localStorage.setItem("users", JSON.stringify(usersInStorage));
 
+  // Logga även in användaren
   setAuthState(usernameInput.value);
-  closeDialog();
 }
 
 function logIn(username, password) {
@@ -61,7 +61,7 @@ function logIn(username, password) {
       user => user.username === username && user.password === password
     )
   ) {
-    // Finns den, sätt inloggningen i localStorage och returnera true
+    // Finns användaren, sätt inloggningen i localStorage och returnera true
     setAuthState(usernameInput.value);
     return true;
   } else {

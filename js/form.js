@@ -17,21 +17,26 @@ let authView = "login";
 function loginSubmit(event) {
   event.preventDefault();
 
-  if (logIn(usernameInput.value, passwordInput.value)) {
-    // Om användaren finns, logga in
-
-    closeDialog();
-    changeAuthView("login"); // Sätt authView till login tills nästa gång
-  } else {
-    if (authView === "login") {
-      // Skriv text i felmeddelandet om användaren inte finns
-      errorMessage.innerText = "Fel namn eller lösenord";
-    } else if (authView === "register") {
-      register(); // Registrera användaren istället
+  // Om vi är på inloggningsskärmen, testa att logga in
+  if (authView === "login") {
+    if (logIn(usernameInput.value, passwordInput.value)) {
+      closeDialog();
       changeAuthView("login"); // Sätt authView till login tills nästa gång
+    } else {
+      errorMessage.innerText = "Fel användarnamn eller lösenord";
+    }
+  }
+
+  // Om vi är på registreringsskärmen, testa att registrera
+  if (authView === "register") {
+    if (register(usernameInput.value, passwordInput.value)) {
+      changeAuthView("login"); // Sätt authView till login tills nästa gång
+    } else {
+      errorMessage.innerText = "Användarnamnet är upptaget";
     }
   }
 }
+
 authForm.addEventListener("submit", loginSubmit);
 
 // Töm formuläret
