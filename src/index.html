@@ -18,50 +18,71 @@
   </head>
   <body>
     <!-- Header -->
-    <header class="container">
-      <img class="header-logo" src="./img/logo.svg" alt="Inloggningify logo" />
-      <button class="btn-primary">Logga in</button>
+    <header>
+      <div class="container header-items">
+        <img
+          class="header-logo"
+          src="./img/logo.svg"
+          alt="Inloggningifys logotyp"
+        />
+        <button class="btn btn-primary">Logga in</button>
+      </div>
     </header>
 
     <!-- Main content -->
     <main class="container">
       <!-- No auth view -->
-      <div id="hero">
+      <div id="hero" class="">
         <h1>
-          En inkomplett tjänst för inloggningar, konstruerad för osäkerhet
+          En inkomplett tjänst för <br />
+          inloggningar, konstruerad<br />
+          för osäkerhet
         </h1>
         <hr class="hero-line" />
-        <button class="btn-primary btn-large">Testa gratis</button>
+        <button class="btn btn-primary btn-large">Testa gratis</button>
       </div>
 
       <!-- Authed view -->
-      <div id="login-greeting hidden">
-        <h2 id="greeting-title"></h2>
+      <div id="login-greeting" class="hidden">
+        <h2 id="greeting-title">Välkommen, Assar.</h2>
         <p>Du har loggat in.</p>
-        <button class="btn-ghost">Logga ut</button>
+        <button class="btn btn-ghost">Logga ut</button>
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="container">
-      <p>&copy; Inloggningify</p>
-      <img class="square" src="./img/square.svg" alt="" />
+    <footer>
+      <div class="container footer-items">
+        <p>&copy; Inloggningify</p>
+        <img class="square" src="./img/square.svg" alt="" />
+      </div>
     </footer>
 
     <!-- Dialog -->
-    <div id="dialog" class="dialog-bg hidden">
+    <div id="dialog" class="hidden">
       <div class="dialog-content">
-        <div class="dialog-close">
+        <button class="dialog-close">
           <img src="./img/cross.svg" alt="" />
           Stäng
-        </div>
+        </button>
         <form class="login-form">
           <h3>Logga in</h3>
-          <label for="form-username">Användarnamn</label>
-          <input id="form-username" type="text" required />
-          <label for="form-password">Lösenord</label>
-          <input id="form-password" type="password" required />
-          <input id="form-submit" type="submit" value="Logga in" />
+          <div class="form-group">
+            <label for="form-username">Användarnamn</label>
+            <input id="form-username" type="text" required />
+          </div>
+          <div class="form-group">
+            <label for="form-password">Lösenord</label>
+            <input id="form-password" type="password" required />
+          </div>
+          <button
+            id="form-submit"
+            type="submit"
+            value="Logga in"
+            class="btn btn-primary"
+          >
+            Logga in
+          </button>
         </form>
       </div>
     </div>
