@@ -8,11 +8,15 @@
     <script defer src="./main.js"></script>
   </head>
   <body>
+    <!-- Header -->
     <header>
       <img class="header-logo" src="./img/logo.svg" alt="Inloggningify logo" />
       <button class="btn-primary">Logga in</button>
     </header>
+
+    <!-- Main content -->
     <main>
+      <!-- No auth view -->
       <div id="hero">
         <h1>
           En inkomplett tjänst för inloggningar, konstruerad för osäkerhet
@@ -21,17 +25,22 @@
         <button class="btn-primary btn-large">Testa gratis</button>
       </div>
 
-      <div id="login-greeting">
+      <!-- Authed view -->
+      <div id="login-greeting hidden">
         <h2 id="greeting-title"></h2>
         <p>Du har loggat in.</p>
         <button class="btn-ghost">Logga ut</button>
       </div>
     </main>
+
+    <!-- Footer -->
     <footer>
       <p>&copy; Inloggningify</p>
       <img class="square" src="./img/square.svg" alt="" />
     </footer>
-    <div class="dialog-bg">
+
+    <!-- Dialog -->
+    <div id="dialog" class="dialog-bg hidden">
       <div class="dialog-content">
         <div class="dialog-close">
           <img src="./img/cross.svg" alt="" />
