@@ -49,10 +49,13 @@
       <!-- Authed view -->
       <section id="login-greeting" class="hidden">
         <h2 id="greeting-title">Välkommen, Assar.</h2>
-        <p>Du har loggat in.</p>
-        <button id="greeting-button" class="btn btn-ghost no-padding">
-          Logga ut
+        <h3>Du har loggat in.</h3>
+        <button id="greeting-button" class="btn btn-primary">Logga ut</button>
+
+        <button id="reset-button" class="btn btn-primary">
+          Återställ local storage
         </button>
+        <pre style="opacity: 0.5" id="local-storage-dump"></pre>
       </section>
     </main>
 

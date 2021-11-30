@@ -11,7 +11,7 @@ const submitButton = document.getElementById("form-submit");
 const errorMessage = document.getElementById("login-error");
 const registerButton = document.getElementById("register-button");
 
-// Skapa en variabel som avgör vilken vy som visas av registrering/inloggning
+// Variabel som avgör vilken vy som visas av registrering/inloggning
 let authView = "login";
 
 function loginSubmit(event) {
@@ -24,19 +24,20 @@ function loginSubmit(event) {
       changeAuthView("login"); // Sätt authView till login tills nästa gång
     } else {
       errorMessage.innerText = "Fel användarnamn eller lösenord";
+      passwordInput.value = "";
     }
   }
 
   // Om vi är på registreringsskärmen, testa att registrera
   if (authView === "register") {
     if (register(usernameInput.value, passwordInput.value)) {
+      closeDialog();
       changeAuthView("login"); // Sätt authView till login tills nästa gång
     } else {
       errorMessage.innerText = "Användarnamnet är upptaget";
     }
   }
 }
-
 authForm.addEventListener("submit", loginSubmit);
 
 // Töm formuläret
@@ -60,11 +61,15 @@ function changeAuthView(value) {
     formTitle.innerText = "Registrera konto";
     registerButton.innerText = "Logga in";
     submitButton.innerText = "Registrera";
-  } else {
+  }
+
+  if (authView === "login") {
     formTitle.innerText = "Logga in";
     registerButton.innerText = "Skapa konto";
     submitButton.innerText = "Logga in";
   }
+
+  usernameInput.focus(); // Fokusera på användarnamn-fältet när vy byts
 }
 registerButton.addEventListener("click", event => {
   event.preventDefault();

@@ -48,12 +48,23 @@ function updateContentView() {
   const hero = document.getElementById("hero");
   const loggedInView = document.getElementById("login-greeting");
   const greetingTitle = document.getElementById("greeting-title");
+  const localStorageDump = document.getElementById("local-storage-dump");
   if (user) {
     // Visa användarens namn
     greetingTitle.innerHTML = `Välkommen, ${user}.`;
+
     // Visa inloggad-sidan
     hero.classList.add("hidden");
     loggedInView.classList.remove("hidden");
+
+    // Visa local storage på skärmen
+    const parsedLocalStorage = JSON.parse(localStorage.getItem("users"));
+
+    // Knapp för att återställa local storage
+    const resetButton = document.getElementById("reset-button");
+    resetButton.addEventListener("click", () => resetLocalStorage());
+
+    localStorageDump.innerText = JSON.stringify(parsedLocalStorage, null, 2);
   } else {
     // Visa utloggad-sidan
     hero.classList.remove("hidden");

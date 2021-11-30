@@ -5,6 +5,10 @@ const users = [
 
 // Initiera databas i local storage om den inte finns
 if (!localStorage.getItem("users") || !localStorage.getItem("user")) {
+  resetLocalStorage();
+}
+
+function resetLocalStorage() {
   localStorage.setItem("users", JSON.stringify(users));
   setAuthState(false);
 }
@@ -15,10 +19,11 @@ if (!localStorage.getItem("users") || !localStorage.getItem("user")) {
 function setAuthState(user) {
   console.log(user ? "Inloggad" : "Utloggad");
   localStorage.setItem("user", JSON.stringify(user));
+
   authStateChanged();
 }
 
-// Hjälper hålla koden fin när många saker behöver veta när man loggar in/ut
+// Alla saker som behöver veta när deras innehåll ska ändras baserat på inloggning
 function authStateChanged() {
   updateHeaderState();
   updateContentView();
@@ -47,6 +52,9 @@ function register(username, password) {
 
   // Logga även in användaren
   setAuthState(usernameInput.value);
+
+  // Visa att allt gick bra
+  return true;
 }
 
 // Logga in användare
