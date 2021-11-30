@@ -3,7 +3,7 @@ const users = [
   { username: "Assar", password: "kattmat" },
 ];
 
-// Initiera databas i local storage
+// Initiera databas i local storage om den inte finns
 if (!localStorage.getItem("users") || !localStorage.getItem("authenticated")) {
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("authenticated", false);
@@ -19,42 +19,18 @@ function authStateChanged() {
 }
 
 // Användas för att logga in eller ut en användare
-function setAuthState(bool) {
+/* function setAuthState(bool) {
   console.log(bool ? "Inloggad" : "Utloggad");
   localStorage.setItem("authenticated", JSON.stringify(bool));
   authStateChanged();
 }
+ */
 
-// ---------------------
-// Inloggningsformuläret
-// ---------------------
-
-// Hänvisa till element
-const authForm = document.getElementById("auth-form");
-const usernameInput = document.getElementById("form-username");
-const passwordInput = document.getElementById("form-password");
-
-function loginSubmit(event) {
-  event.preventDefault();
-
-  const usersInStorage = JSON.parse(localStorage.getItem("users"));
-
-  if (
-    // Här kollar vi om användaren finns i listan
-    usersInStorage.some(
-      user =>
-        user.username === usernameInput.value &&
-        user.password === passwordInput.value
-    )
-  ) {
-    console.log("Rätt namn & lösenord");
-    setAuthState(true);
-    closeDialog();
-  } else {
-    console.log("Fel namn eller lösenord");
-  }
-}
-authForm.addEventListener("submit", loginSubmit);
+const setAuthState = bool => {
+  console.log(bool ? "Inloggad" : "Utloggad");
+  localStorage.setItem("authenticated", JSON.stringify(bool));
+  authStateChanged();
+};
 
 // -----------
 // Dialogrutan
@@ -90,6 +66,10 @@ function closeDialog() {
   document.removeEventListener("keydown", escClose);
   document.removeEventListener("click", outsideClickClose);
 }
+
+// ----------
+// Gränssnitt
+// ----------
 
 // ---------------
 // Dynamisk header
@@ -129,3 +109,34 @@ headerButton.addEventListener("click", headerButtonClick);
 
 const heroButton = document.getElementById("hero-button");
 heroButton.addEventListener("click", () => openDialog());
+
+// ---------------------
+// Inloggningsformuläret
+// ---------------------
+
+// Hänvisa till element
+const authForm = document.getElementById("auth-form");
+const usernameInput = document.getElementById("form-username");
+const passwordInput = document.getElementById("form-password");
+
+function loginSubmit(event) {
+  event.preventDefault();
+
+  const usersInStorage = JSON.parse(localStorage.getItem("users"));
+
+  if (
+    // Här kollar vi om användaren finns i listan
+    usersInStorage.some(
+      user =>
+        user.username === usernameInput.value &&
+        user.password === passwordInput.value
+    )
+  ) {
+    console.log("Rätt namn & lösenord");
+    setAuthState(true);
+    closeDialog();
+  } else {
+    console.log("Fel namn eller lösenord");
+  }
+}
+authForm.addEventListener("submit", loginSubmit);
