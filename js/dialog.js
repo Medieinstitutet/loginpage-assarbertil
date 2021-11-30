@@ -31,4 +31,6 @@ function closeDialog() {
   closeButton.addEventListener("click", closeDialog);
   document.removeEventListener("keydown", escClose);
   document.removeEventListener("click", outsideClickClose);
+  // Rensa formuläret på innehåll
+  clearAuthForm();
 }

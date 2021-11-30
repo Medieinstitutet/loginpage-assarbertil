@@ -6,6 +6,8 @@
 const authForm = document.getElementById("auth-form");
 const usernameInput = document.getElementById("form-username");
 const passwordInput = document.getElementById("form-password");
+const submitButton = document.getElementById("form-submit");
+const errorMessage = document.getElementById("login-error");
 
 function loginSubmit(event) {
   event.preventDefault();
@@ -25,6 +27,15 @@ function loginSubmit(event) {
     closeDialog();
   } else {
     console.log("Fel namn eller lösenord");
+    // Skriv text i elementet för felmeddelanden
+    errorMessage.innerText = "Fel namn eller lösenord";
   }
 }
 authForm.addEventListener("submit", loginSubmit);
+
+// Töm formuläret
+function clearAuthForm() {
+  usernameInput.value = "";
+  passwordInput.value = "";
+  errorMessage.innerText = "";
+}

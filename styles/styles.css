@@ -222,6 +222,10 @@ footer .footer-items {
   padding: 0 !important;
 }
 
+#login-error {
+  color: red;
+}
+
 @media (min-width: 768px) {
   h1 {
     font-size: 3.5rem;
