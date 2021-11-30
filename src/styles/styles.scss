@@ -1,7 +1,3 @@
-// Reset
-
-@import "./reset.css";
-
 // Vars
 
 :root {
@@ -12,14 +8,14 @@
 }
 
 ::selection {
-  background: rgb(var(--yellow));
+  background: rgba(var(--yellow), 1);
 }
 
 // Base elements
 
 body {
-  background: rgb(var(--background));
-  color: rgb(var(--foreground));
+  background: rgba(var(--background), 1);
+  color: rgba(var(--foreground), 1);
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 600;
   font-size: 1rem;
@@ -47,7 +43,7 @@ label {
 }
 
 input {
-  outline: 0.125rem solid rgb(var(--foreground));
+  outline: 0.125rem solid rgba(var(--foreground), 1);
   font-size: 1.25rem;
   padding: 0.5rem 1rem;
   box-sizing: border-box;
@@ -62,7 +58,7 @@ button {
 
   &.btn {
     padding: 0.5rem 1rem 0.5rem 1.5rem;
-    background: rgb(var(--yellow));
+    background: rgba(var(--yellow), 1);
 
     &::after {
       content: url(data-url:../img/chevron.svg);
@@ -72,13 +68,13 @@ button {
     }
 
     &.btn-ghost {
-      background: rgb(var(--background));
+      background: rgba(var(--background), 1);
     }
   }
 }
 
 header {
-  border-bottom: 0.125rem solid rgb(var(--foreground));
+  border-bottom: 0.125rem solid rgba(var(--foreground), 1);
 
   .header-items {
     display: flex;
@@ -98,7 +94,7 @@ main {
     .hero-line {
       width: 8rem;
       height: 0.25rem;
-      background: rgb(var(--foreground));
+      background: rgba(var(--foreground), 1);
       margin: 2rem 0;
     }
   }
@@ -112,7 +108,7 @@ main {
 }
 
 footer {
-  border-top: 0.125rem solid rgb(var(--foreground));
+  border-top: 0.125rem solid rgba(var(--foreground), 1);
 
   .footer-items {
     display: flex;
@@ -134,8 +130,8 @@ footer {
   inset: 0;
 
   #dialog-content {
-    background: rgb(var(--background));
-    border: 0.125rem solid rgb(var(--foreground));
+    background: rgba(var(--background), 1);
+    border: 0.125rem solid rgba(var(--foreground), 1);
     display: flex;
     flex-direction: column;
     align-items: flex-start;

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inloggningify</title>
-    <link rel="stylesheet" href="./styles/styles.scss" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
     <link rel="shortcut icon" href="./img/favicon.svg" type="image/x-icon" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +15,7 @@
       rel="stylesheet"
     />
 
-    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="js/script.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -22,7 +23,7 @@
       <div class="container header-items">
         <img
           class="header-logo"
-          src="data-url:./img/logo.svg"
+          src="img/logo.svg"
           alt="Inloggningifys logotyp"
         />
         <button id="header-auth" class="btn">Logga in</button>
@@ -54,7 +55,7 @@
     <footer>
       <div class="container footer-items">
         <p>&copy; Inloggningify</p>
-        <img class="square" src="data-url:./img/square.svg" alt="" />
+        <img class="square" src="img/square.svg" alt="" />
       </div>
     </footer>
 
@@ -62,7 +63,7 @@
     <div id="dialog" class="hidden">
       <div id="dialog-content">
         <button id="dialog-close">
-          <img src="data-url:./img/cross.svg" alt="" />
+          <img src="img/cross.svg" alt="" />
           Stäng
         </button>
         <form id="auth-form">
