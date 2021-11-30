@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="main.js"></script>
+    <link rel="stylesheet" href="./styles.scss" />
+    <script defer src="./main.js"></script>
   </head>
   <body>
-    <h1>hej</h1>
+    <header>
+      <img class="header-logo" src="./img/logo.svg" alt="Inloggningify logo" />
+      <button class="btn-primary">Logga in</button>
+    </header>
+    <main>
+      <div id="hero">
+        <h1>
+          En inkomplett tjänst för inloggningar, konstruerad för osäkerhet
+        </h1>
+        <hr class="hero-line" />
+        <button class="btn-primary btn-large">Testa gratis</button>
+      </div>
+
+      <div id="login-greeting">
+        <h2 id="greeting-title"></h2>
+        <p>Du har loggat in.</p>
+        <button class="btn-ghost">Logga ut</button>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; Inloggningify</p>
+      <img class="square" src="./img/square.svg" alt="" />
+    </footer>
+    <div class="dialog-bg">
+      <div class="dialog-content">
+        <div class="dialog-close">
+          <img src="./img/cross.svg" alt="" />
+          Stäng
+        </div>
+        <form class="login-form">
+          <h3>Logga in</h3>
+          <label for="form-username">Användarnamn</label>
+          <input id="form-username" type="text" required />
+          <label for="form-password">Lösenord</label>
+          <input id="form-password" type="password" required />
+          <input id="form-submit" type="submit" value="Logga in" />
+        </form>
+      </div>
+    </div>
   </body>
 </html>
