@@ -10,16 +10,13 @@ if (!localStorage.getItem("users") || !localStorage.getItem("user")) {
 
 function resetLocalStorage() {
   localStorage.setItem("users", JSON.stringify(users));
-  setAuthState(false);
+  logOut(false);
 }
 
-// Användas för att logga in eller ut en användare
-// setAuthState("namn") för att logga in
-// setAuthState(false) för att logga ut
+// Användas bakom scenerna för att logga in eller ut en användare
 function setAuthState(user) {
   console.log(user ? "Inloggad" : "Utloggad");
   localStorage.setItem("user", JSON.stringify(user));
-
   authStateChanged();
 }
 
@@ -29,7 +26,7 @@ function authStateChanged() {
   updateContentView();
 }
 
-// Registrera användare
+// Funktion för att registrera användare
 function register(username, password) {
   // Plocka ut alla användare från "databasen"
   const usersInStorage = JSON.parse(localStorage.getItem("users"));
@@ -37,7 +34,6 @@ function register(username, password) {
   // Kolla först att användarnamnet inte redan finns i listan
   if (usersInStorage.some(user => user.username === username)) {
     errorMessage.innerText = "Användaren finns redan";
-    console.log("Finn");
     return false;
   }
 
@@ -57,7 +53,7 @@ function register(username, password) {
   return true;
 }
 
-// Logga in användare
+// Funktion för att logga in användare
 function logIn(username, password) {
   const usersInStorage = JSON.parse(localStorage.getItem("users"));
 
@@ -74,4 +70,9 @@ function logIn(username, password) {
     // Annars returnera false
     return false;
   }
+}
+
+// Funktion för att logga ut användare
+function logOut() {
+  setAuthState(false);
 }

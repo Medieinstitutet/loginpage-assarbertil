@@ -30,7 +30,7 @@ function headerButtonClick() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (user) {
-    setAuthState(false);
+    logOut();
   } else {
     openDialog();
   }
@@ -75,4 +75,4 @@ updateContentView(); // Kör för att kolla om användaren är inloggad när sid
 
 // Fixa så att knappen där loggar ut också
 const greetingButton = document.getElementById("greeting-button");
-greetingButton.addEventListener("click", () => setAuthState(false));
+greetingButton.addEventListener("click", () => logOut());
