@@ -70,6 +70,10 @@ button {
       width: 1.25rem;
       transform: translateY(-2px);
     }
+
+    &.btn-ghost {
+      background: rgb(var(--background));
+    }
   }
 }
 
