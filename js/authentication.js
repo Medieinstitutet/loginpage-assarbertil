@@ -43,10 +43,10 @@ function register(username, password) {
     password: password,
   });
 
-  // Sätt sist tillbaka den uppdaterade listan i localStorage
+  // Sätt sen tillbaka den uppdaterade listan i localStorage
   localStorage.setItem("users", JSON.stringify(usersInStorage));
 
-  // Logga även in användaren
+  // Logga även in användaren i local storage
   setAuthState(usernameInput.value);
 
   // Visa att allt gick bra

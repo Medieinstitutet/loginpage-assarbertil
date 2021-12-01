@@ -1,10 +1,3 @@
-// --------------
-// Knappen i hero
-// --------------
-
-const heroButton = document.getElementById("hero-button");
-heroButton.addEventListener("click", () => openDialog());
-
 // ------
 // Header
 // ------
@@ -49,26 +42,36 @@ function updateContentView() {
   const loggedInView = document.getElementById("login-greeting");
   const greetingTitle = document.getElementById("greeting-title");
   const localStorageDump = document.getElementById("local-storage-dump");
+  const resetButton = document.getElementById("reset-button");
+  const heroButton = document.getElementById("hero-button");
+
   if (user) {
-    // Visa användarens namn
+    // Lägg in användarens namn
     greetingTitle.innerHTML = `Välkommen, ${user}.`;
 
     // Visa inloggad-sidan
     hero.classList.add("hidden");
     loggedInView.classList.remove("hidden");
 
-    // Visa local storage på skärmen
-    const parsedLocalStorage = JSON.parse(localStorage.getItem("users"));
-
     // Knapp för att återställa local storage
-    const resetButton = document.getElementById("reset-button");
     resetButton.addEventListener("click", () => resetLocalStorage());
 
+    // Visa local storage på skärmen
+    const parsedLocalStorage = JSON.parse(localStorage.getItem("users"));
     localStorageDump.innerText = JSON.stringify(parsedLocalStorage, null, 2);
+
+    // Ta bort eventlisteners från den andra vyn
+    heroButton.removeEventListener("click", () => openDialog());
   } else {
     // Visa utloggad-sidan
     hero.classList.remove("hidden");
     loggedInView.classList.add("hidden");
+
+    // Knappen i hero
+    heroButton.addEventListener("click", () => openDialog());
+
+    // Ta bort eventlisteners från den andra vyn
+    resetButton.addEventListener("click", () => resetLocalStorage());
   }
 }
 updateContentView(); // Kör för att kolla om användaren är inloggad när sidan laddas

@@ -1,7 +1,3 @@
-// ----------------------------------------------------------------------------------------
-// Dialogrutan
-// ----------------------------------------------------------------------------------------
-
 // Hänvisa till alla element
 const dialog = document.getElementById("dialog");
 const dialogContent = document.getElementById("dialog-content");
@@ -19,18 +15,18 @@ function outsideClickClose(event) {
 
 function openDialog() {
   dialog.classList.remove("hidden");
-  closeButton.addEventListener("click", closeDialog); // Stänga med stängknappen
-  document.addEventListener("keydown", escClose); // Stänga med ESC-knappen
-  setTimeout(() => document.addEventListener("click", outsideClickClose), 100); // Stänga genom att klicka utanför
   usernameInput.focus(); // Fokusera på användarnamn-fältet så fort dialogen öppnas
+  closeButton.addEventListener("click", closeDialog); // Stänga med stängknappen
+  dialog.addEventListener("keydown", escClose); // Stänga med ESC-knappen
+  setTimeout(() => dialog.addEventListener("click", outsideClickClose), 0); // Stänga genom att klicka utanför
 }
 
 function closeDialog() {
   dialog.classList.add("hidden");
   // Ta bort alla event listeners som är kopplade till dialogrutan när den stängs
-  closeButton.addEventListener("click", closeDialog);
-  document.removeEventListener("keydown", escClose);
-  document.removeEventListener("click", outsideClickClose);
+  closeButton.removeEventListener("click", closeDialog);
+  dialog.removeEventListener("keydown", escClose);
+  dialog.removeEventListener("click", outsideClickClose);
   clearAuthForm(); // Rensa formuläret på innehåll
   changeAuthView("login"); // Visa alltid inloggnings-vyn först
 }

@@ -1,7 +1,3 @@
-// ---------------------
-// Inloggningsformuläret
-// ---------------------
-
 // Hänvisa till element
 const authForm = document.getElementById("auth-form");
 const formTitle = document.getElementById("form-title");
@@ -14,15 +10,17 @@ const registerButton = document.getElementById("register-button");
 // Variabel som avgör vilken vy som visas av registrering/inloggning
 let authView = "login";
 
+// Körs när formuläret skickas
 function loginSubmit(event) {
   event.preventDefault();
 
-  // Om vi är på inloggningsskärmen, testa att logga in
+  // Om vi är på inloggningsskärmen, försök logga in
   if (authView === "login") {
     if (logIn(usernameInput.value, passwordInput.value)) {
       closeDialog();
       changeAuthView("login"); // Sätt authView till login tills nästa gång
     } else {
+      // Är det felaktigt användarnamn eller lösenord, visa felmeddelande och töm fältet
       errorMessage.innerText = "Fel användarnamn eller lösenord";
       passwordInput.value = "";
     }
@@ -35,6 +33,7 @@ function loginSubmit(event) {
       changeAuthView("login"); // Sätt authView till login tills nästa gång
     } else {
       errorMessage.innerText = "Användarnamnet är upptaget";
+      usernameInput.value = "";
     }
   }
 }
