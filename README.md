@@ -4,5 +4,5 @@
 https://inloggningify.netlify.app
 
 ## Användare
-- Janne, test
+- janne, test
 - Assar, kattmat
